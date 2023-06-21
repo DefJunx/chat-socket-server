@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test socket</title>
+  </head>
+  <body>
+    <ul id="messages"></ul>
+    <div>
+      <textarea id="message"></textarea>
+    </div>
+    <div>
+      <button type="button" id="send">Send</button>
+    </div>
+  </body>
+  <script type="module">
+    import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
+    const socket = io("http://localhost:3000");
+    const messagesContainer = document.querySelector("#messages");
+
+    socket.emit("conversationId", "cb6f589a-5f06-4079-87cd-e8c343f3d848");
+
+    socket.on("new-message", message => {
+      console.log("new message", message);
+      const li = document.createElement("li");
+
+      li.innerText = `Lui: ${message}`;
+      messagesContainer.append(li);
+    });
+
+    document.querySelector("#send").addEventListener("click", () => {
+      const newMessage = document.querySelector("#message").value;
+      const li = document.createElement("li");
+
+      li.innerText = `Io: ${newMessage}`;
+
+      messagesContainer.append(li);
+
+      socket.emit("new-message", newMessage);
+    });
+  </script>
+</html>
