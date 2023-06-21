@@ -1,10 +1,14 @@
 {
   "name": "chat-socket-server",
   "version": "1.0.0",
+  "engines": {
+    "node": "18"
+  },
   "description": "",
   "scripts": {
     "dev": "nodemon src/index.ts",
-    "build": "tsc -p tsconfig.json"
+    "build": "tsc -p tsconfig.json",
+    "start": "node build/index.js"
   },
   "keywords": [],
   "author": "",
