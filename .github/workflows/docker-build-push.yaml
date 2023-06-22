@@ -26,4 +26,4 @@ jobs:
         run: docker tag ${{ env.DOCKER_IMAGE_NAME }} ${{ env.DOCKERHUB_REPO }}
 
       - name: Push Docker image to Docker Hub
-        run: docker push $DOCKERHUB_REPO
+        run: docker push ${{ env.DOCKERHUB_REPO }}
